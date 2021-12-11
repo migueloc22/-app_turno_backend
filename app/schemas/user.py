@@ -7,6 +7,8 @@ class User(BaseModel):
     email:str
     passworld:str
     number_document:str
+    gender:str
+    birthday_date:str
     fk_id_user_type:Optional[str]
     fk_id_document_type:str
     # token:str

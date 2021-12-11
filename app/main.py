@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi_jwt_auth import AuthJWT
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 # from typing import Optional
 
 # from sqlalchemy.sql.operators import from_
@@ -15,6 +16,20 @@ from router.turn import turn
 from router.observation import observation
 from router.reporte import reporte
 app = FastAPI()
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 class Settings(BaseModel):
     authjwt_secret_key: str = "0cdb0aec294d9265ab84b64251f2038b5d30ce594f77a897d9ba802329cc1132"
 
