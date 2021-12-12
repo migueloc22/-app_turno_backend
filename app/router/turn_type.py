@@ -9,3 +9,6 @@ turn_type = APIRouter()
 def get_turn_type(Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
     return conn.execute(turn_types.select()).fetchall()
+@turn_type.get("/turn_type",tags=['turn_type'])
+def get_turn_type():
+    return conn.execute(turn_types.select()).fetchall()

@@ -12,6 +12,6 @@ users = Table("users",meta,
     Column("birthday_date",Date,nullable=true),
     Column('fk_id_user_type',ForeignKey('user_type.id')),
     Column('fk_id_document_type',ForeignKey('document_type.id')),
-    Column("token",String(500),unique=True,nullable=True),
+    Column("token",String(500),nullable=True),
     )
 meta.create_all(engine)

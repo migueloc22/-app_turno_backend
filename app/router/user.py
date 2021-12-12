@@ -65,6 +65,10 @@ def get_users(id: str):
     # print(user)
     # return conn.execute(users.select()).fetchall()
     return conn.execute(query).first()
+@user.get("/users_mechanical", tags=["users"])
+def get_users_mechanical():
+    query = users.select().where(users.c.fk_id_user_type == 3)
+    return conn.execute(query).fetchall()
 
 
 @user.delete("/users/{id}", tags=["users"])
