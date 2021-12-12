@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Response,Depends,HTTPException
+from fastapi import APIRouter,Response,Depends,HTTPException,Request
 from sqlalchemy.sql.expression import null, select
 from sqlalchemy.orm import aliased
 from config.db import conn
@@ -87,6 +87,15 @@ def delete_turns(id:str):
 @turn.put("/turns",tags=["turns"])
 def update_turns(id:str,turn:Turn):
     mod_turn = {"name":turn.name,"email":turn.email,"passworld":turn.passworld}
+    query= turns.update().values(mod_turn).where(turns.c.id==id)
+    # print(query)
+    # print(turn)
+    # return conn.execute(turns.select()).fetchall()
+    conn.execute(query)
+    return Response(status_code=HTTP_204_NO_CONTENT)
+@turn.put("/turns_states/{id}/{status}",tags=["turns"])
+def update_turns_states(id:str,status:str):
+    mod_turn = {"fk_id_turn_state":status}
     query= turns.update().values(mod_turn).where(turns.c.id==id)
     # print(query)
     # print(turn)

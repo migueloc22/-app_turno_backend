@@ -8,5 +8,6 @@ observations = Table("observation",meta,
     Column("date_creation",DateTime,default= now()),
     Column("state",Boolean,default=True),
     Column("fk_id_turn",ForeignKey("turn.id")),
+    Column("fk_id_mechanical_user",ForeignKey("users.id")),
 )
 meta.create_all(engine)
